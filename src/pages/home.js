@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Scream from '../components/Scream';
+import User from '../components/User';
 
 class Home extends Component {
     render() {
@@ -12,6 +13,7 @@ class Home extends Component {
                 </Grid>
                 <Grid item sm={4} xs={12}>
                     <p>Profile</p>
+                    <User />
                 </Grid>
             </Grid>
         )
