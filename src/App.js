@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Router } from 'react-router';
 import { Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
+import { createBrowserHistory } from 'history';
 
 //Components
 import Navbar from './components/Navbar';
@@ -29,27 +31,31 @@ const theme = createMuiTheme({
   },
 });
 
+const history = createBrowserHistory()
+
 class App extends Component  {
   render() {
     return (
-      <ThemeProvider theme={theme}>
-        <div className="App">
-          <Navbar />
-          <div className='container'>
-              <Switch>
-                <Route exact path='/'>
-                  <Home />
-                </Route>
-                <Route path='/login'>
-                  <Login />
-                </Route>
-                <Route path='/signup'>
-                  <Signup />
-                </Route>
-              </Switch>
+      <Router history={history}>
+        <ThemeProvider theme={theme}>
+          <div className="App">
+            <Navbar history={history} />
+            <div className='container'>
+                <Switch>
+                  <Route path='/login'>
+                    <Login history={history} />
+                  </Route>
+                  <Route path='/signup'>
+                    <Signup history={history} />
+                  </Route>
+                  <Route exact path='/'>
+                    <Home />
+                  </Route>
+                </Switch>
+            </div>
           </div>
-        </div>
-      </ThemeProvider>
+        </ThemeProvider>
+      </Router>
     );
   }
 }
