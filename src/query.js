@@ -22,15 +22,26 @@ query {
 
 export const FEED_QUERY = gql`
 query FeedQuery {
-    feed {
-      count 
+    feed(orderBy: createdAt_DESC) {
       posts {
         id
         url
         description
+        createdAt
         postedBy {
+          id
           name
           imageUrl
+        }
+        comments {
+          id
+          body
+        }
+        votes {
+          id
+          user {
+            id
+          }
         }
       }
     }
