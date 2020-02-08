@@ -18,15 +18,17 @@ import CloseIcon from "@material-ui/icons/Close";
 
 const styles = {
   submitButton: {
-      position: "relatvie"
+      position: "relative",
+      float: "rigth",
+      marginTop: 20
   },
   progressSpinner: {
       position: 'absolute'
   },
   closeButton: {
       position: 'absolute',
-      left: '90%',
-      top: '10%'
+      left: '91%',
+      top: '6%'
   }
 };
 
@@ -35,6 +37,8 @@ function CreatePost(props) {
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
+  const [urlTooShort, setUrlTooShort] = useState(false)
+  const [descTooShort, setDescTooShort] = useState(false)
 
   const handleOpen = () => {
     setOpen(true);
@@ -69,7 +73,11 @@ function CreatePost(props) {
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <MyButton
           tip="Close"
-          onClick={handleClose}
+          onClick={() => {
+              handleClose();
+              setDescTooShort(false);
+              setUrlTooShort(false);
+          }}
           tipClassName={classes.closeButton}
         >
           <CloseIcon />
@@ -78,6 +86,17 @@ function CreatePost(props) {
         <DialogContent>
           <form onSubmit={e => {
               e.preventDefault();
+
+              if (url.length < 1) {
+                setUrlTooShort(true)
+                return
+              }
+
+              if (description.length < 1) {
+                  setDescTooShort(true)
+                  return
+              }
+
               setLoading(true)
               post({ variables: { url, description } })
               setOpen(false)
@@ -92,6 +111,7 @@ function CreatePost(props) {
               onChange={e => setUrl(e.target.value)}
               fullWidth
               value={url}
+              helperText={urlTooShort ? "Title too short" : null}
             ></TextField>
             <TextField
               name="body"
@@ -103,6 +123,7 @@ function CreatePost(props) {
               onChange={e => setDescription(e.target.value)}
               fullWidth
               value={description}
+              helperText={descTooShort ? "Post too short" : null}
             ></TextField>
             <Button
               type="submit"

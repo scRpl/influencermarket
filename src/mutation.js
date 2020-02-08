@@ -86,7 +86,7 @@ export const VOTE = gql`
       }
     }
   }
-`
+`;
 
 export const CREATE_POST = gql`
   mutation PostMutation($url: String!, $description: String!) {
@@ -117,7 +117,7 @@ export const CREATE_POST = gql`
       }
     }
   }
-`
+`;
 
 export const DELETE_POST = gql`
   mutation DeletePost($id: ID!) {
@@ -125,4 +125,21 @@ export const DELETE_POST = gql`
       id
     }
   }
-`
+`;
+
+export const CREATE_COMMENT = gql`
+  mutation CreateComment($postId: ID!, $body: String!) {
+    comment(postId: $postId, body: $body) {
+      id
+      body
+      writtenBy {
+        id
+        name
+        imageUrl
+      }
+      post {
+        id
+      }
+    }
+  }
+`;

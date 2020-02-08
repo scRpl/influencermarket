@@ -6,6 +6,7 @@ import { GET_USER } from "../query";
 import { VOTE } from "../mutation";
 import { timeDifferenceForDate } from "../util/utils";
 import DeletePost from './DeletePost';
+import PostDialog from './PostDialog';
 
 //MUI
 import Card from "@material-ui/core/Card";
@@ -19,11 +20,13 @@ import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 const styles = {
   card: {
+    position: 'relative',
     display: "flex",
     marginBottom: 20
   },
   image: {
-    minWidth: 150
+    width: 150,
+    objectFit: "cover"
   },
   content: {
     padding: 25,
@@ -31,7 +34,7 @@ const styles = {
   }
 };
 
-function Scream(props) {
+function Post(props) {
   const { classes, post } = props;
   const {
     data: { isLoggedIn, user }
@@ -84,9 +87,10 @@ function Scream(props) {
         </MyButton>
         <span>{post.comments.length} Comments</span>
         {deleteButton}
+        <PostDialog post={post} />
       </CardContent>
     </Card>
   );
 }
 
-export default withStyles(styles)(Scream);
+export default withStyles(styles)(Post);

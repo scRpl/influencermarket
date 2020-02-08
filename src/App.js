@@ -13,6 +13,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/home';
 import Login from './pages/login';
 import Signup from './pages/signup';
+import User from './pages/user';
 
 const theme = createMuiTheme({
   palette: {
@@ -47,6 +48,9 @@ class App extends Component  {
                   </Route>
                   <Route path='/signup'>
                     <Signup history={history} />
+                  </Route>
+                  <Route path='/users/:name'>
+                    <User history={history} />
                   </Route>
                   <Route exact path='/'>
                     <Home />

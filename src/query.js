@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const GET_USER = gql`
   query {
@@ -12,16 +12,16 @@ export const GET_USER = gql`
       website
     }
   }
-`
+`;
 
 export const IS_LOGGED_IN = gql`
-query {
+  query {
     isLoggedIn @client
-}
+  }
 `;
 
 export const FEED_QUERY = gql`
-query FeedQuery {
+  query FeedQuery {
     feed(orderBy: createdAt_DESC) {
       posts {
         id
@@ -36,6 +36,10 @@ query FeedQuery {
         comments {
           id
           body
+          writtenBy {
+            name
+            imageUrl
+          }
         }
         votes {
           id
@@ -46,4 +50,4 @@ query FeedQuery {
       }
     }
   }
-`
+`;

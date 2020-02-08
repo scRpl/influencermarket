@@ -21,14 +21,14 @@ const httpLink = createHttpLink({
 const token = localStorage.getItem(AUTH_TOKEN);
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000/`,
+  uri: `ws://localhost:4000`,
   options: {
     reconnect: true,
     connectionParams: {
-      authorization: token ? `Bearer ${token}` : ""
+      authToken: localStorage.getItem(AUTH_TOKEN),
     }
   }
-});
+})
 
 const authLink = setContext((_, { headers }) => {
   return {

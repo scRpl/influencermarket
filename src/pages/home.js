@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import Scream from "../components/Scream";
+import Post from "../components/Post";
 import User from "../components/User";
 import { FEED_QUERY } from "../query";
 import { NEW_POST, NEW_VOTE } from "../subscription";
@@ -49,11 +49,11 @@ function Home(props) {
     <Grid container spacing={3}>
       <Grid item sm={8} xs={12}>
         {data.feed.posts.map(post => (
-          <Scream
+          <Post
             key={post.id}
             post={post}
             updateCacheAfterVote={updateCacheAfterVote}
-          ></Scream>
+          ></Post>
         ))}
       </Grid>
       <Grid item sm={4} xs={12}>
